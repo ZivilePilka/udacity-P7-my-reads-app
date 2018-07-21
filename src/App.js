@@ -1,13 +1,13 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import BookList from './BookList'
-import Search from './Search.js'
+import Search from './Search'
 import { Route, Link } from 'react-router-dom'
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    
+
   }
 
   render() {
