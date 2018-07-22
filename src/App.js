@@ -7,7 +7,15 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
+    books: [],
+    query: '',
+    searchedBooks: []
+  }
 
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
   }
 
   render() {
@@ -17,7 +25,9 @@ class BooksApp extends React.Component {
           <Search />
         )} />
         <Route exact path="/" render={() => (
-          <BookList />
+          <BookList
+            books={this.state.books}
+          />
         )} />
       </div>
     )
