@@ -7,9 +7,7 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    books: [],
-    query: '',
-    searchedBooks: []
+    books: []
   }
 
   componentDidMount() {
@@ -30,7 +28,10 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/search" render={() => (
-          <Search />
+          <Search
+            updateShelf={this.updateShelf}
+            books={this.props.books}
+          />
         )} />
         <Route exact path="/" render={() => (
           <BookList
