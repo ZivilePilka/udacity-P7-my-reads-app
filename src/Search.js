@@ -10,14 +10,21 @@ class Search extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({query})
-
     if (query) {
+      this.setState({query})
       BooksAPI.search(query).then((searchedBooks) => {
-        // if there is no book according to search term
         if(searchedBooks.error) {
           this.setState({searchedBooks: []})
         } else {
+          searchedBooks.map(searchedBook => {
+              searchedBook.shelf = "none"
+              this.props.books.map(book => {
+                if (book.id === searchedBook.id) {
+                  searchedBook.shelf = book.shelf
+                }
+              })
+            return searchedBooks
+          })
           this.setState({searchedBooks: searchedBooks})
         }
       })
@@ -42,14 +49,14 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.searchedBooks.map(searchedBook =>
+            {this.state.searchedBooks.map(searchedBook => (
               <li key={searchedBook.id}>
                 <Book
                   book={searchedBook}
                   updateShelf={this.props.updateShelf}
                 />
               </li>
-            )}
+            ))}
           </ol>
         </div>
       </div>
